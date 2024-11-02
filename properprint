@@ -6,9 +6,9 @@
 --- @param text string: Text to print
 --- @param incl number?: Indentation level (default: 0)
 function pprint(text,incl)
-    xsize,ysize = term.getSize()
+    local xsize,ysize = term.getSize()
     incl = incl or 0
-    inclstring = ""
+    local inclstring = ""
     for i=1,incl,1 do
         inclstring = " " .. inclstring
     end
@@ -29,7 +29,8 @@ function printWithoutLinebreakHelper(text,inclstring,xsize,firstline)
     end
     
     -- Get position for end of line
-    lcp = getLastCharPosition(string.sub(text,0,xsize-#inclstring)," ")
+    local lcp = getLastCharPosition(string.sub(text,0,xsize-#inclstring)," ")
+    local cutposition
     if lcp==nil then
         cutposition = xsize
     else
@@ -40,6 +41,7 @@ function printWithoutLinebreakHelper(text,inclstring,xsize,firstline)
     print(string.sub(inclstring .. text,0,cutposition))
     
     -- All lines from second line onwards have two spaces more indentation
+    local inclstringnew
     if firstline then
         inclstringnew = inclstring .. " "
     else 
@@ -55,6 +57,6 @@ end
 --- @param char string: Character to search for
 --- @return number?: Position of the last occurrence of char
 function getLastCharPosition(string,char)
-    index = string.find(string, char .. "[^" .. char .. "]*$")
+    local index = string.find(string, char .. "[^" .. char .. "]*$")
     return index
 end
