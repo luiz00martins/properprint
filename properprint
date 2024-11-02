@@ -1,4 +1,10 @@
--- ProperPrint 1.0; Still alpha version! Bugs may occur!
+--- ProperPrint Library for ComputerCraft
+--- @author PentagonLP, SkyTheCodeMaster
+--- @version 1.0
+
+--- Prints text with proper line breaks and indentation
+--- @param text string: Text to print
+--- @param incl number?: Indentation level (default: 0)
 function pprint(text,incl)
     xsize,ysize = term.getSize()
     incl = incl or 0
@@ -9,6 +15,11 @@ function pprint(text,incl)
     printWithoutLinebreakHelper(text,inclstring,xsize,true)
 end
  
+--- Helper function to print text without line breaks
+--- @param text string: Text to print
+--- @param inclstring string: Indentation string
+--- @param xsize number: Maximum line width
+--- @param firstline boolean: Whether this is the first line
 function printWithoutLinebreakHelper(text,inclstring,xsize,firstline)
     
     -- Remaining text fits in one line?
@@ -39,7 +50,10 @@ function printWithoutLinebreakHelper(text,inclstring,xsize,firstline)
     printWithoutLinebreakHelper(string.sub(text,cutposition+1-#inclstring),inclstringnew,xsize,false)
 end
  
--- Helper function to get the last position of a character in a string
+--- Helper function to get the last position of a character in a string
+--- @param string string: String to search in
+--- @param char string: Character to search for
+--- @return number?: Position of the last occurrence of char
 function getLastCharPosition(string,char)
     index = string.find(string, char .. "[^" .. char .. "]*$")
     return index
